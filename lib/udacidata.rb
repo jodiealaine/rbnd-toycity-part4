@@ -7,10 +7,17 @@ class Udacidata
   # Your code goes here!
   def self.create(attributes=nil)
     item = self.new attributes
-    data_path = File.dirname(__FILE__) + "/../data/data.csv"
-    CSV.open(data_path, "a") do |csv|
+    CSV.open(self.data_path, "a") do |csv|
      	csv << [item.id, attributes[:brand], attributes[:name], attributes[:price]]
     end
     item
+  end
+
+  def self.all
+  	CSV.read self.data_path
+  end
+
+  def self.data_path
+  	File.dirname(__FILE__) + "/../data/data.csv"
   end
 end
