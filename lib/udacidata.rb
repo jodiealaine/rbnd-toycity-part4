@@ -22,8 +22,8 @@ class Udacidata
   	num == 1 ? @@all.first : @@all.take(num)
   end
 
-  def self.last
-  	@@all.last
+  def self.last num=1
+  	num == 1 ? @@all.last : @@all[-num,num]
   end
 
   def self.data_path

@@ -77,17 +77,17 @@ class TestUdacidata < MiniTest::Test
     data = CSV.read(@data_path).drop(1)
     assert_equal(data.last[0].to_i, product.id)
   end
-  #
-  # def test_last_n_returns_array_type
-  #   array_of_products = Product.last(3)
-  #   assert_kind_of(Array, array_of_products)
-  # end
-  #
-  # def test_last_n_returns_correct_number_of_products
-  #   array_of_products = Product.last(3)
-  #   assert_equal(3, array_of_products.size)
-  # end
-  #
+  
+  def test_last_n_returns_array_type
+    array_of_products = Product.last(3)
+    assert_kind_of(Array, array_of_products)
+  end
+  
+  def test_last_n_returns_correct_number_of_products
+    array_of_products = Product.last(3)
+    assert_equal(3, array_of_products.size)
+  end
+  
   # def test_find_method_returns_correct_product
   #   product = Product.find(5)
   #   assert_equal(5, product.id)
