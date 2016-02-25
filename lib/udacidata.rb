@@ -26,6 +26,10 @@ class Udacidata
   	num == 1 ? @@all.last : @@all[-num,num]
   end
 
+  def self.find id
+  	@@all.each {|product| return product if product.id == id }
+  end
+
   def self.data_path
   	File.dirname(__FILE__) + "/../data/data.csv"
   end
