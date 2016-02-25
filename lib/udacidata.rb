@@ -18,8 +18,8 @@ class Udacidata
   	@@all
   end
 
-  def self.first
-  	@@all.first
+  def self.first num=1
+  	num == 1 ? @@all.first : @@all.take(num)
   end
 
   def self.data_path
