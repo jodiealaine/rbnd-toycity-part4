@@ -38,11 +38,11 @@ class TestUdacidata < MiniTest::Test
     end
   end
   
-  # def test_first_method_returns_product_object
-  #   product = Product.first
-  #   assert_instance_of(Product, product)
-  # end
-  #
+  def test_first_method_returns_product_object
+    product = Product.first
+    assert_instance_of(Product, product)
+  end
+  
   # def test_first_method_returns_correct_product
   #   product = Product.first
   #   data = CSV.read(@data_path).drop(1)

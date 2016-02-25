@@ -4,20 +4,22 @@ require 'csv'
 
 class Udacidata
 	# Your code goes here!
+	@@all = []
   def self.create(attributes=nil)
     item = self.new attributes
     CSV.open(self.data_path, "a+") do |csv|
-     	csv << [item.id, attributes[:brand], item, attributes[:price]]
+     	csv << [item.id, item.brand, item.name, item.price]
     end
-    item
+   	@@all << item
+   	item
   end
 
   def self.all
-  	all = []
-  	CSV.foreach(self.data_path) do |row|
-  		all << row[2] unless row == ["id", "brand", "product", "price"]
-  	end
-  	all
+  	@@all
+  end
+
+  def self.first
+  	@@all.first
   end
 
   def self.data_path
