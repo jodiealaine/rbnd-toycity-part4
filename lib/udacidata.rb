@@ -30,6 +30,20 @@ class Udacidata
   	@@all.each {|product| return product if product.id == id }
   end
 
+  def self.destroy id
+  	data_table = CSV.table(self.data_path, write_headers: true)
+		data_table.delete_if do |row|
+  		row[:id] == id
+		end
+
+		File.open(self.data_path, 'w') do |f|
+  		f.write(data_table.to_csv)
+		end
+		@@all.delete(self.find id)
+	end
+  
+  
+
   def self.data_path
   	File.dirname(__FILE__) + "/../data/data.csv"
   end
