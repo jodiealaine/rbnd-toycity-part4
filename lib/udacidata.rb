@@ -22,6 +22,10 @@ class Udacidata
   	num == 1 ? @@all.first : @@all.take(num)
   end
 
+  def self.last
+  	@@all.last
+  end
+
   def self.data_path
   	File.dirname(__FILE__) + "/../data/data.csv"
   end
