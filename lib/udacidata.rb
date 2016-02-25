@@ -3,18 +3,21 @@ require_relative 'errors'
 require 'csv'
 
 class Udacidata
-	@@num = 0
-  # Your code goes here!
+	# Your code goes here!
   def self.create(attributes=nil)
     item = self.new attributes
-    CSV.open(self.data_path, "a") do |csv|
-     	csv << [item.id, attributes[:brand], attributes[:name], attributes[:price]]
+    CSV.open(self.data_path, "a+") do |csv|
+     	csv << [item.id, attributes[:brand], item, attributes[:price]]
     end
     item
   end
 
   def self.all
-  	CSV.read self.data_path
+  	all = []
+  	CSV.foreach(self.data_path) do |row|
+  		all << row[2] unless row == ["id", "brand", "product", "price"]
+  	end
+  	all
   end
 
   def self.data_path

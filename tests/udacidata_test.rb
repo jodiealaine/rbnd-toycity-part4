@@ -31,13 +31,13 @@ class TestUdacidata < MiniTest::Test
     assert_kind_of(Array, array_of_products)
   end
   
-  # def test_all_method_returns_array_of_products
-  #   array_of_products = Product.all
-  #   array_of_products.each do |product|
-  #     assert_instance_of(Product, product)
-  #   end
-  # end
-  #
+  def test_all_method_returns_array_of_products
+    array_of_products = Product.all
+    array_of_products.each do |product|
+      assert_instance_of(Product, product)
+    end
+  end
+  
   # def test_first_method_returns_product_object
   #   product = Product.first
   #   assert_instance_of(Product, product)
