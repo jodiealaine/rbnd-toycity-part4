@@ -2,8 +2,9 @@ require_relative 'find_by'
 require_relative 'errors'
 require 'csv'
 
-class Udacidata
+class Udacidata  
 	# Your code goes here!
+	create_finder_methods :brand, :name
 	@@all = []
   def self.create(attributes=nil)
     item = self.new attributes
