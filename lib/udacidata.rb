@@ -43,7 +43,11 @@ class Udacidata
 		@@all.delete(self.find id)
 	end
   
-  
+  def self.where options={}
+		products = []
+  	@@all.each {|product| products << product if product.brand == options[:brand]}
+  	products
+  end
 
   def self.data_path
   	File.dirname(__FILE__) + "/../data/data.csv"
