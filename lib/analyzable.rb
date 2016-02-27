@@ -2,6 +2,7 @@ module Analyzable
   def average_price products
   	(products.map{|product| product.price}.reduce(:+) / products.count).round(2)
   end
+  
   def print_report products	
     brand_totals = calculate_brand_totals(brands_list(products))
   	name_totals = calculate_name_totals(names_list(products))

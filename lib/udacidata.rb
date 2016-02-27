@@ -6,9 +6,6 @@ class Udacidata
 	create_finder_methods :brand, :name
   def self.create(attributes=nil)
     item = self.new attributes
-    # p item.brand
-    # p item.name 
-    # p item.price
     unless self.item_exists? item
 			CSV.open(self.data_path, "a+") do |csv|
      		csv << [item.id, item.brand, item.name, item.price]  
