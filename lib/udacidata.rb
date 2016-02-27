@@ -20,11 +20,17 @@ class Udacidata
   end
 
   def self.first num=1
-  	num == 1 ? @@all.first : @@all.take(num)
+  	return @@all.first if num == 1 
+		first_num_rows = CSV.table(self.data_path, write_headers: true).first(num)
+  	first_num = []
+  	first_num_rows.each do |row|
+  	 	first_num << self.find(row[:id])
+  	end
+  	first_num
   end
 
   def self.last num=1
-  	num == 1 ? @@all.last : @@all[-num,num]
+  	num == 1 ? @@all.last : @@all.last(num)
   end
 
   def self.find id
@@ -47,6 +53,22 @@ class Udacidata
 		products = []
   	@@all.each {|product| products << product if product.brand == options[:brand]}
   	products
+  end
+
+  def update options={}
+  	@brand, @price = options[:brand], options[:price]
+  	data_table = CSV.table(self.class.data_path, write_headers: true)
+		data_table.each do |row|
+  		if row[:id] == id
+  			row[:brand] = options[:brand]
+  			row[:price] = options[:price]
+  		end
+		end
+
+		File.open(self.class.data_path, 'w') do |f|
+  		f.write(data_table.to_csv)
+		end
+		self
   end
 
   def self.data_path
