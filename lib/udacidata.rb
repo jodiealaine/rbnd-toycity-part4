@@ -34,14 +34,17 @@ class Udacidata
 
   def self.find id
   	@@all.each {|product| return product if product.id == id }
+  	raise ProductNotFoundError, "Product id:#{id} not found"
   end
 
   def self.destroy id
+  	raise ProductNotFoundError, "Product id:#{id} not found" if self.find(id) == false 
+  	
   	data_table = CSV.table(self.data_path, write_headers: true)
 		data_table.delete_if do |row|
   		row[:id] == id
 		end
-
+		
 		File.open(self.data_path, 'w') do |f|
   		f.write(data_table.to_csv)
 		end
@@ -57,12 +60,13 @@ class Udacidata
   end
 
   def update options={}
-  	@brand, @price = options[:brand], options[:price]
+  	@brand = options[:brand] if options[:brand]
+  	@price = options[:price] if options[:price]
   	data_table = CSV.table(self.class.data_path, write_headers: true)
 		data_table.each do |row|
   		if row[:id] == id
-  			row[:brand] = options[:brand]
-  			row[:price] = options[:price]
+  			row[:brand] = options[:brand] if options[:brand]
+  			row[:price] = options[:price] if options[:price]
   		end
 		end
 

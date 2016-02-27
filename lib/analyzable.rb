@@ -1,13 +1,11 @@
 module Analyzable
   def average_price products
-  	(products.map{|product| product.price}.reduce(:+) / products.count.to_f).round(2)
+  	(products.map{|product| product.price}.reduce(:+) / products.count).round(2)
   end
   def print_report products	
     brand_totals = calculate_brand_totals(brands_list(products))
   	name_totals = calculate_name_totals(names_list(products))
-  	report = generate_report(brand_totals, name_totals, brand_totals, name_totals)
-  	puts report
-  	report
+  	generate_report(brand_totals, name_totals, brand_totals, name_totals)
   end
 
   def count_by_brand products
@@ -46,7 +44,7 @@ module Analyzable
   	"Inventory by Brand:\n" +
   	"#{brand_totals.map {|brand, total| "– #{brand}: #{total}\n"}.join}" +
   	 "Inventory by Name:\n" +
-  	"#{name_totals.map {|name, total| "– #{name}: #{total}\n"}.join}."
+  	"#{name_totals.map {|name, total| "– #{name}: #{total}\n"}.join}"
   end
 end
  
