@@ -3,7 +3,6 @@ require_relative 'errors'
 require 'csv'
 
 class Udacidata  
-	# Your code goes here!
 	create_finder_methods :brand, :name
 	@@all = []
   def self.create(attributes=nil)
@@ -47,11 +46,13 @@ class Udacidata
   		f.write(data_table.to_csv)
 		end
 		@@all.delete(self.find id)
-	end
+  end
   
   def self.where options={}
 		products = []
-  	@@all.each {|product| products << product if product.brand == options[:brand]}
+  	@@all.each do |product|
+  	  products << product if (product.brand == options[:brand] || product.name == options[:name])
+  	end
   	products
   end
 
